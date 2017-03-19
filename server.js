@@ -14,9 +14,59 @@ var path      = require('path');
 var conf      = require(path.join(__dirname, 'config'));
 var internals = require(path.join(__dirname, 'internals'));
 
+// MongoClient will probably not be necessary
+let MongoClient = require('mongodb').MongoClient
+
 // -- Setup the application
 setupExpress();
 setupSocket();
+
+setTimeout(() =>
+{
+	//console.log('internals', internals)
+
+	//console.log('INTERNALS internals.ready:', internals.ready)
+	//console.log('INTERNALS internals.mosca:', internals.mosca)
+	//console.log('internals mongoUrl', internals.mosca.url)
+
+	//console.log('internals.mosca.db', internals.mosca.db)
+
+	//console.log('INTERNALS internals.db:', internals.db)
+
+	//let testGuy = {name: 'testGuy1', class: 'mobileComputing'}
+	// internals.db.collection('testGuys').insert(testGuy, (err, result) =>
+	// {
+	// 	if (err)
+	// 		return console.log(err)
+	// 	console.log(testGuy + " inserted successfully ")
+	// })	
+
+	let mongoUrl = 'mongodb://127.0.0.1:27017/mqtt'
+	MongoClient.connect(mongoUrl, (err, db) =>
+	{
+		if (err)
+			console.log("ERROR***:", err)
+
+		console.log("Connected to mongo server successfully (not sure if true)")
+
+		// try to insert a testGuy
+		let testGuy = {name: 'testGuy1', class: 'mobileComputing'}
+		db.collection('testguys').insert(testGuy, (err, result) =>
+		{
+			if (err)
+				console.log('INSERT ERROR:', err)
+			console.log("saved a doc to testguys collection successfully \(not true\)")
+
+		})
+
+		//db.close()
+	})
+
+
+
+}, 10000)
+
+
 
 
 // -- Socket Handler

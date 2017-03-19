@@ -16,7 +16,7 @@ block content
 
 			// Implement the graphics portion in the canvas supplied below
 			div.well
-				canvas(id='grid')
+				canvas(id='grid' style="background: url('./img/campus.png')")
 	
 	div(class='panel')
 		div.panel-body
@@ -24,7 +24,10 @@ block content
 			div(id='debugLog', class='collapse')
 				div(id='debugLogList', class='well')
 
-//- The scripts needed by this page
+	div(class='connectedDevice')
+		h2(id='connectionTest') No device(s) currently connected
+
+//- The scri pts needed by this page
 block scripts
 	script(type='text/javascript').
 		$(() => {
@@ -38,6 +41,11 @@ block scripts
 				$('#debugLogList').append('<div>' + time + ': ' + data.type + ' | ' + data.msg + '</div>');
 			});
 			//--------------------------
+
+			socket.on('test connection', data => 
+			{
+				console.log('test connection from server:', data)
+			})
 		});
 	
 	script(type='text/javascript').
@@ -46,4 +54,25 @@ block scripts
 			//----------------------------
 			var canv = $('#grid');
 			//----------------------------
+
+			var canvas = document.getElementById("grid");
+			var ctx = canvas.getContext('2d')
+
+			ctx.beginPath();
+			// x pos, y pos, radius, start angle, end angle
+			ctx.arc(40, 45, 10,0, 2*Math.PI)
+			ctx.stroke()
+
+			ctx.beginPath();
+			ctx.arc(100, 50, 10,0, 2*Math.PI);
+			ctx.stroke();
+			
+			ctx.beginPath();
+			ctx.arc(190, 40, 10,0, 2*Math.PI);
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.arc(220, 95, 10,0, 2*Math.PI);
+			ctx.stroke();
+
 		});

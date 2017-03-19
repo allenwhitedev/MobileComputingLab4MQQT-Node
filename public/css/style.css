@@ -20,3 +20,9 @@ body {
 #grid {
 	width: 100%;	
 }
+
+.connectedDevice 
+	{ height: 40px; width: 80%; background-color: #fff; } 
+
+.well { padding: 15px; display: inline-block; }
+#grid { height: 324px; width: 648px; }
