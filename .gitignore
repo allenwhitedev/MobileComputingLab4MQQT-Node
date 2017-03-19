@@ -60,3 +60,5 @@ typings/
 
 # DS_Store files from Mac
 .DS_Store
+
+# mongo files, ignoring these causes an error, but they are too large for github
